@@ -1,6 +1,6 @@
 from marshmallow import post_load
 
-from .user import User, UserSchema
+from app.api.v1.models.user.user import User, UserSchema
 from .user_type import UserType
 
 

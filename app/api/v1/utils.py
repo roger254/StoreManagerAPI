@@ -1,9 +1,9 @@
 from functools import wraps
-from flask import request, make_response, jsonify
+from flask import request, make_response
 from app.api.v1 import views
-from .models.admin import Admin, AdminSchema
-from .models.regular import Regular, RegularSchema
-from .models.admin import UserType
+from app.api.v1.models.user.admin import AdminSchema
+from app.api.v1.models.user.regular import RegularSchema
+from app.api.v1.models.user.admin import UserType
 
 
 def requires_attendant(f):

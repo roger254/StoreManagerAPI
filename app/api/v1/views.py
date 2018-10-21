@@ -1,9 +1,9 @@
-from flask import jsonify, request, make_response
+from flask import jsonify, request
 from flask_restful import Resource
-from .utils import requires_admin, requires_attendant
-from app.api.v1.models.regular import Regular, RegularSchema
-from app.api.v1.models.admin import Admin, AdminSchema
-from app.api.v1.models.user_type import UserType
+from .utils import requires_admin
+from app.api.v1.models.user.regular import Regular, RegularSchema
+from app.api.v1.models.user.admin import Admin
+from app.api.v1.models.user.user_type import UserType
 
 users = [
     Regular('Attendant 1', 'pass_att1'),
