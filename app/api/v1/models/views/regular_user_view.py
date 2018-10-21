@@ -13,7 +13,7 @@ users = [
 ]
 
 
-class AddRegularUser(Resource):
+class RegularUserView(Resource):
     """represents endpoint for regular user"""
 
     @requires_admin
