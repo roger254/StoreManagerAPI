@@ -1,13 +1,15 @@
 from flask import request
 from flask_restful import Resource
+
+from app.api.v1.models.views.regular_user_view import users
 from .utils import requires_admin, requires_auth
 from app.api.v1.models.item.product import Product, ProductSchema
 
 products = [
-    Product("Product 1", 23.0, 34),
-    Product("Product 2", 45.0, 19),
-    Product("Product 3", 45.5, 56),
-    Product("Product 4", 78.6, 45)
+    Product("Product 1", 23.0, 34, users[1]),
+    Product("Product 2", 45.0, 19, users[1]),
+    Product("Product 3", 45.5, 56, users[3]),
+    Product("Product 4", 78.6, 45, users[3])
 ]
 
 
@@ -31,7 +33,8 @@ class ProductView(Resource):
         product = Product(
             product_name=json_data['product_name'],
             product_price=json_data['product_price'],
-            product_quantity=json_data['product_quantity']
+            product_quantity=json_data['product_quantity'],
+            added_by=users[1]  # TODO: get from login
         )
         for i in products:
             if i.item_name == product.item_name:

@@ -1,15 +1,14 @@
 from marshmallow import post_load
 
-from app.api.v1.models.item.item import Item, ItemShema
+from app.api.v1.models.item.item import Item, ItemSchema
 from .item_type import ItemType
-from app.api.v1.models.user.regular import Regular
 
 
 class SaleOrder(Item):
     """Represents the Sale Order"""
 
     def __init__(self, sale_name, sale_price, sale_quantity, created_by):
-        super(SaleOrder, self).__init__(sale_name, sale_price, sale_quantity, ItemType.SALE_ORDER)
+        super(SaleOrder, self).__init__(sale_name, sale_price, sale_quantity, ItemType.SALE_ORDER, created_by)
         self.created_by = created_by
 
     def __repr__(self):
@@ -19,7 +18,7 @@ class SaleOrder(Item):
                'created_by={self.created_by!r}))>'.format(self=self)
 
 
-class SaleOrderSchema(ItemShema):
+class SaleOrderSchema(ItemSchema):
     @post_load()
     def make_sale(self, data):
         return SaleOrder(**data)

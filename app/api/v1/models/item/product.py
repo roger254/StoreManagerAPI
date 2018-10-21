@@ -7,8 +7,8 @@ from .item_type import ItemType
 class Product(Item):
     """Represents the Store Products"""
 
-    def __init__(self, product_name, product_price, product_quantity):
-        super(Product, self).__init__(product_name, product_price, product_quantity, ItemType.PRODUCT)
+    def __init__(self, product_name, product_price, product_quantity, added_by):
+        super(Product, self).__init__(product_name, product_price, product_quantity, ItemType.PRODUCT, added_by)
 
     def __repr__(self):
         return '<Product(product_name={self.item_name!r}, ' \
