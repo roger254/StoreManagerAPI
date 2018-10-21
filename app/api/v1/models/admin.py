@@ -11,7 +11,7 @@ class Admin(User):
         super(Admin, self).__init__(user_name, password, UserType.ADMIN)
 
     def __repr__(self):
-        return '<User(user_name={self.user_name!r, user_type={self.user_type}))>'.format(self=self)
+        return '<User(user_name={self.user_name!r}, user_type={self.user_type}))>'.format(self=self)
 
 
 class AdminSchema(UserSchema):

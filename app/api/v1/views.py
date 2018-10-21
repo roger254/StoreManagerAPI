@@ -1,6 +1,6 @@
 from flask import jsonify, request, make_response
 from flask_restful import Resource
-from .utils import requires_auth
+from .utils import requires_admin, requires_attendant
 from app.api.v1.models.regular import Regular, RegularSchema
 from app.api.v1.models.admin import Admin, AdminSchema
 from app.api.v1.models.user_type import UserType
@@ -13,9 +13,10 @@ users = [
 ]
 
 
-class Add_Regular_User(Resource):
+class AddRegularUser(Resource):
+    """represents endpoint for regular user"""
 
-    @requires_auth
+    @requires_admin
     def get(self):
         schema = RegularSchema(many=True)
         admins = schema.dump(
@@ -23,9 +24,22 @@ class Add_Regular_User(Resource):
         )
         return jsonify(admins.data)
 
-    @requires_auth
+    @requires_admin
     def post(self):
-        regular = RegularSchema().load(request.get_json())
-        users.append(regular.data)
-
-        return '', 204
+        json_data = request.get_json(force=True)
+        if not json_data:
+            return {'message': 'No input provided'}, 400
+        data, errors = RegularSchema().load(json_data)
+        if errors:
+            return errors, 422
+        attendant = Regular(
+            user_name=json_data['user_name'],
+            password=json_data['password']
+        )
+        for i in users:
+            if i.user_name == attendant.user_name:
+                return {'status': 'failed', 'message': 'user already exits'}, 201
+        else:
+            users.append(attendant)
+            response = RegularSchema().dump(attendant).data
+            return {'status': 'success', 'data': response}, 201

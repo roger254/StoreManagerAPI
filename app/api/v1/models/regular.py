@@ -11,7 +11,7 @@ class Regular(User):
         super(Regular, self).__init__(user_name, password, UserType.REGULAR)
 
     def __repr__(self):
-        return '<User(user_name={self.user_name!r, user_type={self.user_type}))>'.format(self=self)
+        return '<User(user_name={self.user_name!r}, user_type={self.user_type}))>'.format(self=self)
 
 
 class RegularSchema(UserSchema):
