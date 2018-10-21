@@ -1,6 +1,6 @@
 from flask import request
 from flask_restful import Resource
-from .utils import requires_admin
+from .utils import requires_admin, requires_auth
 from app.api.v1.models.item.product import Product, ProductSchema
 
 products = [
@@ -13,6 +13,12 @@ products = [
 
 class ProductView(Resource):
     """represents endpoint for products"""
+
+    @requires_auth
+    def get(self):
+        schema = ProductSchema(many=True)
+        all_products = schema.dump(products)
+        return {'status': 'success', 'data': all_products}, 200
 
     @requires_admin
     def post(self):
