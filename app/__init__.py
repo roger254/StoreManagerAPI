@@ -11,7 +11,7 @@ api.add_resource(RegularUserView, '/users')
 
 from app.api.v1.models.views.product_view import ProductView
 
-api.add_resource(ProductView, '/products')
+api.add_resource(ProductView, '/products', '/products/<int:id>')
 
 from app.api.v1.models.views.sale_order_view import SaleOrderView
 

@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, jsonify
 from flask_restful import Resource
 
 from app.api.v1.models.views.regular_user_view import users
@@ -17,10 +17,23 @@ class ProductView(Resource):
     """represents endpoint for products"""
 
     @requires_auth
-    def get(self):
+    def get(self, **id):
         schema = ProductSchema(many=True)
         all_products = schema.dump(products)
-        return {'status': 'success', 'data': all_products}, 200
+        if id is None:
+            return {'status': 'success', 'data': all_products}, 200
+        else:
+            print(id['id'])
+            pos = id['id']
+            for i in range(len(all_products[0])):
+                if id['id'] > len(all_products[0]) or pos < 1:
+                    response = {
+                        'message': 'Item doesnt Exist'
+                    }
+                    return response, 404
+                else:
+                    product = all_products[0][pos - 1]
+                    return jsonify(product)
 
     @requires_admin
     def post(self):
