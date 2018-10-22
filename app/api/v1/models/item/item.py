@@ -4,12 +4,12 @@ from marshmallow import Schema, fields
 
 class Item:
     """Represents The Item Model"""
+    item_type = None
 
-    def __init__(self, item_name, item_price, item_quantity, item_type, created_by):
+    def __init__(self, item_name, item_price, item_quantity, created_by):
         self.item_name = item_name
         self.item_price = item_price
         self.item_quantity = item_quantity
-        self.item_type = item_type
         self.created_by = created_by
         self.date_created = date.datetime.now()
 
