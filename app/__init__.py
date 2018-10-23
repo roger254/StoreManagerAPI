@@ -1,7 +1,8 @@
 from flask_api import FlaskAPI
 
-from instance.config import app_config
 from app.api.v1.views.products import ProductView
+from app.api.v1.views.sales import SaleView
+from instance.config import app_config
 
 
 def create_app(config_name):
@@ -11,5 +12,5 @@ def create_app(config_name):
 
     # Views
     ProductView.register(app, route_base='/products/')
-
+    SaleView.register(app, route_base='/sales/')
     return app
