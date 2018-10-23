@@ -1,6 +1,8 @@
 from flask import request, jsonify, make_response
 from flask_classful import FlaskView, route
 
+from .auth import authenticate
+
 sales = [
     {
         'id': 1,
@@ -28,6 +30,7 @@ sales = [
 
 class SaleView(FlaskView):
     """Product View Class"""
+    decorators = [authenticate]
 
     def index(self):
         """returns all sale records"""
