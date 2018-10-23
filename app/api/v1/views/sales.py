@@ -1,5 +1,5 @@
 from flask import request, jsonify, make_response
-from flask_classful import FlaskView
+from flask_classful import FlaskView, route
 
 sales = [
     {
@@ -47,3 +47,15 @@ class SaleView(FlaskView):
             }
             sales.append(sale)
             return make_response(jsonify(sale)), 201
+
+    @route('/<s_id>')
+    def get(self, s_id):
+        for i in range(len(sales)):
+            if sales[i]['id'] == int(s_id):
+                return make_response(jsonify(sales[i])), 200
+        else:
+            response = {
+                'status': 'Failed',
+                'message': 'Sale Not Found'
+            }
+            return make_response(jsonify(response)), 404

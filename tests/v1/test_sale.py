@@ -2,6 +2,8 @@ import os
 import sys
 import unittest
 
+from flask import json
+
 sys.path.append(os.path.abspath(os.path.dirname(__file__) + '/' + '../..'))
 from app import create_app
 
@@ -32,6 +34,15 @@ class SaleTestCase(unittest.TestCase):
         response = self.client().post('/sales/', data=self.sale)
         self.assertEqual(response.status_code, 201)
         get_req = self.client().get('/sales/')
+        self.assertEqual(get_req.status_code, 200)
+        self.assertIn('Sale 1', str(get_req.data))
+
+    def test_get_specific_sales(self):
+        """Test can get all sales GET"""
+        response = self.client().post('/sales/', data=self.sale)
+        self.assertEqual(response.status_code, 201)
+        response_in_json = json.loads(response.data)
+        get_req = self.client().get('/sales/{}'.format(response_in_json['id']))
         self.assertEqual(get_req.status_code, 200)
         self.assertIn('Sale 1', str(get_req.data))
 
