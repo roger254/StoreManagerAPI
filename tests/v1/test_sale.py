@@ -27,6 +27,14 @@ class SaleTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertIn('Sale 1', str(response.data))
 
+    def test_get_all_sales(self):
+        """Test can get all sales GET"""
+        response = self.client().post('/sales/', data=self.sale)
+        self.assertEqual(response.status_code, 201)
+        get_req = self.client().get('/sales/')
+        self.assertEqual(get_req.status_code, 200)
+        self.assertIn('Sale 1', str(get_req.data))
+
 
 if __name__ == '__main__':
     unittest.main()

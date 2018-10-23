@@ -29,6 +29,11 @@ sales = [
 class SaleView(FlaskView):
     """Product View Class"""
 
+    def index(self):
+        """returns all sale records"""
+        # TODO: return best response when empty
+        return make_response(jsonify(sales)), 200
+
     def post(self):
         post_data = request.data
         # if it exists
