@@ -1,4 +1,4 @@
-import json
+from flask import json
 import os
 import sys
 import unittest
