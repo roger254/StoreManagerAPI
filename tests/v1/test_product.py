@@ -25,6 +25,14 @@ class ProductTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertIn('Product 1', str(response.data))
 
+    def test_get_all_products(self):
+        """Test can get all products GET"""
+        response = self.client().post('/products/', data=self.product)
+        self.assertEqual(response.status_code, 201)
+        get_req = self.client().get('/products/')
+        self.assertEqual(get_req.status_code, 200)
+        self.assertIn('Product 1', str(get_req.data))
+
 
 if __name__ == '__main__':
     unittest.main()
