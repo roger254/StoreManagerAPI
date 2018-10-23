@@ -12,6 +12,7 @@ def create_app(config_name):
     app.config.from_pyfile('config.py')
 
     # Views
+
     ProductView.register(app, route_base='/products/')
     SaleView.register(app, route_base='/sales/')
     UserView.register(app, route_base='/users/')

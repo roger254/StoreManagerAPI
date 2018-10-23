@@ -1,6 +1,8 @@
 from flask import request, jsonify, make_response
 from flask_classful import FlaskView, route
 
+from .auth import authenticate
+
 products = [
     {
         'id': 1,
@@ -25,12 +27,14 @@ products = [
 
 class ProductView(FlaskView):
     """Product View Class"""
+    decorators = [authenticate]
 
     def index(self):
         # TODO: return valid response if none exists
         return make_response(jsonify(products)), 200
 
-    def post(self):
+    def post(self, ):
+
         post_data = request.data
         # if it exists
         if post_data:
