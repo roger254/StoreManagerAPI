@@ -48,7 +48,7 @@ class UserTestCase(unittest.TestCase):
             'password': '1234'
         }
         result = self.client().post('/users/login', data=non_user)
-        response = json.loads(result.data)
+        response = json.loads(result.data.decode())
         self.assertEqual(result.status_code, 401)
         self.assertEqual(
             response['message'], "Invalid username or password, Please try again")

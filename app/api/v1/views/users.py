@@ -1,7 +1,7 @@
 from flask import request, jsonify, make_response
 from flask_classful import FlaskView, route
 
-from .auth import generate_user_token, authenticate
+from .auth import generate_user_token
 
 users = [
     {
