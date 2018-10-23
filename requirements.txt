@@ -1,9 +1,8 @@
-Flask-API.yandex
-flask
-marshmallow
 aniso8601==3.0.2
 Click==7.0
 Flask==1.0.2
+Flask-API==1.0
+Flask-Classful==0.14.1
 Flask-RESTful==0.3.6
 ItsDangerous==1.0.0
 Jinja2==2.10

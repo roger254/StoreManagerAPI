@@ -1,9 +1,9 @@
 anguage: python
 install:
 - pip install -r requirements.txt
-env:
-- FLASK_ENV='testing'
+
 script:
-- python app/tests/test_products.py
-- coverage run --source app app/tests/test_products.py
-- codeclimate-test-reporter --token 480cf55ca141bb9fce2d5e9ebc3e98f69ddf84587bd133352545feaf4445d23e
+- python tests/v1/test_products.py
+- python tests/v1/test_sales.py
+- coverage run tests/v1/test_sale.py
+- coverage run tests/v1/test_product.py
