@@ -40,7 +40,7 @@ class ProductTestCase(unittest.TestCase):
         response = self.client().post('/products/', data=self.product)
         self.assertEqual(response.status_code, 201)
         response_in_json = json.loads(response.data)
-        get_req = self.client().get('/products/{}'.format(response_in_json['id']))
+        get_req = self.client().get('/products/{}'.format(int(response_in_json['id'])))
         self.assertEqual(get_req.status_code, 200)
         self.assertIn('Product 1', str(get_req.data))
 

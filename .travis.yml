@@ -6,7 +6,5 @@ install:
 - pip install -r requirements.txt
 
 script:
-- python tests/v1/test_products.py
-- python tests/v1/test_sales.py
 - coverage run manage.py test
 - codeclimate-test-reporter --token c597c43ec71041c4499459c0203f0bd8825b9d305527c07b11296b994a3c724b
