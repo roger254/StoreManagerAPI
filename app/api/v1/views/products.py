@@ -48,7 +48,8 @@ class ProductView(FlaskView):
         """Get item with id"""
         for i in range(len(products)):
             if products[i]['id'] == int(p_id):
-                return make_response(jsonify(products[i])), 200
+                product = products[i]
+                return make_response(jsonify(product)), 200
         else:
             response = {
                 'status': 'Failed',
