@@ -1,14 +1,15 @@
-from flask import Blueprint
+from flask_api import FlaskAPI
 
-from flask_restful import Api
-from app.api.v1.models.views.regular_user_view import RegularUserView
+from instance.config import app_config
+from app.api.v1.views.products import ProductView
 
-api_blue = Blueprint('api', __name__)
-api = Api(api_blue)
 
-# add route
-api.add_resource(RegularUserView, '/users')
+def create_app(config_name):
+    app = FlaskAPI(__name__, instance_relative_config=True)
+    app.config.from_object(app_config[config_name])
+    app.config.from_pyfile('config.py')
 
-from app.api.v1.models.views.product_view import ProductView
+    # Views
+    ProductView.register(app, route_base='/products/')
 
-api.add_resource(ProductView, '/products')
+    return app

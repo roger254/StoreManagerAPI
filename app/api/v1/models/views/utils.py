@@ -7,6 +7,7 @@ from app.api.v1.models.user.regular import RegularSchema
 from app.api.v1.models.user.admin import UserType
 
 
+# TODO : use token based
 def requires_attendant(f):
     @wraps(f)
     def wrapped(*args, **kwargs):
