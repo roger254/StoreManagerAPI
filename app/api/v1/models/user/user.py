@@ -13,6 +13,7 @@ class User:
 
     def validate_data(self):
         errors = []
+
         if len(self.user_name) < 8:
             errors.append("Username Must be at least 8 characters")
         if len(self.password) < 8:

@@ -5,10 +5,6 @@ from .auth import authenticate
 from ..models.items.product import Product
 
 products = [
-    Product(1, 'Product 1', 45.6, 7),
-    Product(2, 'Product 2', 36.6, 9),
-    Product(3, 'Product 3', 33.6, 10),
-    Product(4, 'Product 4', 78.8, 15),
 ]
 
 
@@ -17,7 +13,12 @@ class ProductView(FlaskView):
     decorators = [authenticate]
 
     def index(self):
-        # TODO: return valid response if none exists
+        if len(products) < 1:
+            res = {
+                'status': 'Failed',
+                'message': 'No Products exits'
+            }
+            return res, 404
         response = {
             'status': 'Products Found',
             'products': list(map(f, products))
