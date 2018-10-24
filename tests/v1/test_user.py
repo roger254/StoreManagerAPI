@@ -15,17 +15,15 @@ class UserTestCase(unittest.TestCase):
         self.app = create_app(config_name='testing')
         self.client = self.app.test_client
         self.user = {
-            'id': 1,
-            'user_name': 'test User 1',
-            'password': "test123",
-            'user_type': 'Attendant'
+            'user_name': 'testUser1',
+            'password': "test1234"
         }
 
     def test_attendant_creation(self):
         """Test User Creation POST"""
         response = self.client().post('/users/register', data=self.user)
         self.assertEqual(response.status_code, 201)
-        self.assertIn('test User 1', str(response.data))
+        self.assertIn('testUser1', str(response.data))
 
     def test_user_already_registered(self):
         """Test User cannot register twice"""
