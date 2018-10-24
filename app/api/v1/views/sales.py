@@ -1,5 +1,5 @@
 from flask import request, jsonify, make_response
-from flask_classful import FlaskView, route
+from flask_classful import FlaskView, route, re
 
 from .auth import authenticate
 

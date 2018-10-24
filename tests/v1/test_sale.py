@@ -15,6 +15,9 @@ class SaleTestCase(unittest.TestCase):
         """Initialize tes variables"""
         self.app = create_app(config_name='testing')
         self.client = self.app.test_client
+        self.product = {
+
+        }
         self.sale = {
             'id': 1,
             's_name': 'Sale 1',
