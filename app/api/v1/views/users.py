@@ -1,27 +1,14 @@
 from flask import request, jsonify, make_response
 from flask_classful import FlaskView, route
 
+from app.api.v1.models.user.regular import Regular
 from .auth import generate_user_token
 
 users = [
-    {
-        'id': 1,
-        'user_name': 'User 1',
-        'password': "test123",
-        'user_type': 'Attendant'
-    },
-    {
-        'id': 2,
-        'user_name': 'User 2',
-        'password': "test234",
-        'user_type': 'Attendant'
-    },
-    {
-        'id': 1,
-        'user_name': 'Admin 1',
-        'password': "admin123",
-        'user_type': 'Admin'
-    }
+    Regular(1, 'Attendant 1', 'attpass1'),
+    Regular(2, 'Attendant 2', 'attpass2'),
+    Regular(3, 'Attendant 3', 'attpass3'),
+    Regular(4, 'Attendant 4', 'attpass4')
 ]
 
 
@@ -33,9 +20,18 @@ class UserView(FlaskView):
         """Get user data"""
         post_data = request.data
         # if it exists
-        user = request.data['user_name']
+        user_name = request.data['user_name']
+        password = request.data['password']
+        user = Regular(
+            len(users) + 1,
+            user_name,
+            password
+        )
+        invalid_user = user.validate_data()
+        if invalid_user:
+            return make_response(jsonify(invalid_user)), 208
         for i in range(len(users)):
-            if users[i]['user_name'] == user:
+            if users[i].user_name == user.user_name:
                 message = {
                     'status': 'Registration Failed',
                     'message': 'User Exists. Please Log in!'
@@ -43,14 +39,11 @@ class UserView(FlaskView):
                 return make_response(jsonify(message)), 202
         else:
             if post_data:
-                user = {
-                    'id': users[-1]['id'] + 1,
-                    "user_name": post_data['user_name'],
-                    "password": post_data['password'],
-                    "user_type": 'Attendant'
-                }
                 users.append(user)
-                return make_response(jsonify(user)), 201
+                response = {
+                    'message': 'User Registered! Please log in'
+                }
+                return make_response(jsonify(response)), 201
 
     @route('/login', methods=['POST'])
     def login(self):
@@ -58,8 +51,8 @@ class UserView(FlaskView):
             user = request.data['user_name']
             user_pass = request.data['password']
             for i in range(len(users)):
-                if users[i]['user_name'] == user and users[i]['password'] == user_pass:
-                    access_token = generate_user_token(users[i]['id'])
+                if users[i].user_name == user and users[i].password == user_pass:
+                    access_token = generate_user_token(users[i].user_id)
                     if access_token:
                         response = {
                             "message": "You've logged in successfully.",
