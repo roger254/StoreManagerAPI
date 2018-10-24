@@ -58,20 +58,19 @@ class SaleView(FlaskView):
             }
             return res, 404
 
-
-@route('/<p_id>')
-def get(self, p_id):
-    """Get item with id"""
-    for i in range(len(sales)):
-        if sales[i].item_id == int(p_id):
-            sale = sales[i]
-            return make_response(jsonify(sale.details())), 200
-    else:
-        response = {
-            'status': 'Failed',
-            'message': 'Sale Item Not Found'
-        }
-        return make_response(jsonify(response)), 404
+    @route('/<p_id>')
+    def get(self, p_id):
+        """Get item with id"""
+        for i in range(len(sales)):
+            if sales[i].item_id == int(p_id):
+                sale = sales[i]
+                return make_response(jsonify(sale.details())), 200
+        else:
+            response = {
+                'status': 'Failed',
+                'message': 'Sale Item Not Found'
+            }
+            return make_response(jsonify(response)), 404
 
 
 def f(n):
