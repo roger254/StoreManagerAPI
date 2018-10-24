@@ -18,3 +18,10 @@ class User:
         if len(self.password) < 8:
             errors.append("Password must be at least 8 characters ")
         return errors
+
+    def user_details(self):
+        return dict(
+            user_id=self.user_id,
+            user_name=self.user_name,
+            user_type=self.user_type
+        )

@@ -23,7 +23,7 @@ class UserTestCase(unittest.TestCase):
         """Test User Creation POST"""
         response = self.client().post('/users/register', data=self.user)
         self.assertEqual(response.status_code, 201)
-        self.assertIn('User Registered', str(response.data))
+        self.assertIn('testUser1', str(response.data))
 
     def test_user_already_registered(self):
         """Test User cannot register twice"""

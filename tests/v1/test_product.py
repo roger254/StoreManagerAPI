@@ -85,7 +85,7 @@ class ProductTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
         response_in_json = json.loads(response.data)
         get_req = self.client().get(
-            '/products/{}'.format(int(response_in_json['id'])),
+            '/products/1',
             headers=dict(Authorization="Bearer " + access_token),
         )
         self.assertEqual(get_req.status_code, 200)

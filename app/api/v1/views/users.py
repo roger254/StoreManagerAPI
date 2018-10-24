@@ -40,10 +40,7 @@ class UserView(FlaskView):
         else:
             if post_data:
                 users.append(user)
-                response = {
-                    'message': 'User Registered! Please log in'
-                }
-                return make_response(jsonify(response)), 201
+                return make_response(jsonify(user.user_details())), 201
 
     @route('/login', methods=['POST'])
     def login(self):

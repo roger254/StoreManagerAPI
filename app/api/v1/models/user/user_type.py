@@ -2,5 +2,10 @@ from enum import Enum
 
 
 class UserType(Enum):
-    ADMIN = 'ADMIN'
-    REGULAR = 'REGULAR'
+    _init_ = 'value string'
+
+    ADMIN = 1, 'ADMIN'
+    REGULAR = 2, 'REGULAR'
+
+    def __str__(self):
+        return self.string
