@@ -57,7 +57,6 @@ local_settings.py
 db.sqlite3
 
 # Flask stuff:
-instance/
 .webassets-cache
 
 # Scrapy stuff:
@@ -102,3 +101,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+.idea/StoreManagerAPI.iml
+.idea/codeStyles/
+.idea/misc.xml
+.idea/vcs.xml
+.idea/workspace.xml
+
